@@ -2,8 +2,8 @@ import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Footer from './components/Footer';
-import Login from './components/Loginsignup';
 import Form from './components/Form';
+
 
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -18,13 +18,14 @@ function App() {
                 <Route path="/" element={<Hero />} />
                 <Route path="/form" element={<Form/>} />
                 <Route path="/about" element={<About/>} />
-                <Route path="/Login" element={<Login/>} />
+                {/* <Route path="/Login" element={} /> */}
             </Routes>
         </Router>
             <div className='footer'>
                 <Footer />
-            </div>
-
+            </div> 
+            
+            {/* <Login/> */}
             
         </>
   );

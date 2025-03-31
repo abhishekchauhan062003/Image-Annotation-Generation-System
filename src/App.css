@@ -96,13 +96,23 @@ html, body {
   outline: none;
   border: 0px;
    box-shadow: none;
-}
+   transition: transform 0.3s ease-in-out;
+} 
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active{
   background-color: #495056;
   outline: none !important;
   border: none !important;
    box-shadow: none;
+   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+   transform: scale(1.05);
+
+}
+
+.btn-primary:active {
+  background-color: #3a4145 !important; 
+  transform: scale(1) !important;
+  box-shadow: none !important;
 }
 
 .form-content textarea {
@@ -173,3 +183,8 @@ html, body {
     width: calc(33.333% - (2rem / 3));
     object-fit: contain;
   }
+
+
+.hidden{
+  display: none;
+}

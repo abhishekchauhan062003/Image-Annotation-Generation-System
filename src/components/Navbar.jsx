@@ -4,7 +4,7 @@ import "../App.css";
 import { useState } from "react";
 
 function Navbar() {
-  const [text, setText] = useState("Login");
+  const [text, setText] = useState("Log in");
   const imgstyle = {
     height: "50px",
     width: "200px",
@@ -15,12 +15,12 @@ function Navbar() {
   function hideLogin(){
     document.getElementById('Login').classList.add('hidden');
     document.getElementById('SignUp').classList.remove('hidden');
-    setText('SignUp');
+    setText('Sign up');
   }
   function hideSignup(){
     document.getElementById('SignUp').classList.add('hidden');
     document.getElementById('Login').classList.remove('hidden');
-    setText('LogIn');
+    setText('Log in');
   }
   return (
     <nav className="navbar navbar-expand-lg navbar-dark " style={navstyle}>
@@ -61,7 +61,7 @@ function Navbar() {
               data-bs-toggle="modal"
               data-bs-target="#exampleModal"
             >
-              Login
+              Log in/Sign up
             </button>
 
             <div
@@ -75,7 +75,7 @@ function Navbar() {
                 <div class="modal-content">
                   <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">
-                      Login
+                      {text}
                     </h1>
                     <button
                       type="button"
@@ -111,7 +111,7 @@ function Navbar() {
                             id="inputPassword"
                           />
                         </div>
-                        <label htmlFor=""><p>Don't Have an Account? <a href="#" onClick={hideLogin}>Sign Up</a></p></label>
+                        <label htmlFor=""><p>Don't Have an Account? <a href="#" onClick={hideLogin}>Sign up</a></p></label>
                       </div>
                     </div>
                     <div class="hidden" id="SignUp">
@@ -150,7 +150,7 @@ function Navbar() {
                           id="inputPassword"
                         />
                       </div>
-                      <label htmlFor=""><p>Have an Account? <a href="#" onClick={hideSignup}>Login</a></p></label>
+                      <label htmlFor=""><p>Have an Account? <a href="#" onClick={hideSignup}>Log in</a></p></label>
                     </div>
                   </div>
                     <div class="modal-footer">

@@ -57,7 +57,7 @@ const Form = () => {
                         <div className="col-md-12">
                         {/* <DragAndDrop/> */}
                             <input className="form-control" type="file" accept="image/*" onChange={handleImageChange} name="name" placeholder="Key Words" required/>
-                            {preview && <img src={preview} alt="Selected" style={{ width: '300px', height: '300px' }} />}
+                            {preview && <img src={preview} alt="Selected" style={{ width: '500px', height: '300px', paddingTop:'1rem' }} />}
                         </div>
                     <div className="form-check">
                       <p className="">We will not share your data.</p>

@@ -12,15 +12,16 @@ function Navbar() {
   const navstyle = {
     backgroundColor: "rgba(30, 30, 30)",
   };
-  function hideLogin(){
-    document.getElementById('Login').classList.add('hidden');
-    document.getElementById('SignUp').classList.remove('hidden');
-    setText('Sign up');
+
+  function hideLogin() {
+    document.getElementById("Login").classList.add("hidden");
+    document.getElementById("SignUp").classList.remove("hidden");
+    setText("Sign up");
   }
-  function hideSignup(){
-    document.getElementById('SignUp').classList.add('hidden');
-    document.getElementById('Login').classList.remove('hidden');
-    setText('Log in');
+  function hideSignup() {
+    document.getElementById("SignUp").classList.add("hidden");
+    document.getElementById("Login").classList.remove("hidden");
+    setText("Log in");
   }
   return (
     <nav className="navbar navbar-expand-lg navbar-dark " style={navstyle}>
@@ -50,6 +51,11 @@ function Navbar() {
               <li className="nav-item">
                 <a className="nav-link" href="/about">
                   About
+                </a>
+              </li>
+              <li>
+              <a className="nav-link" href="/Profile">
+                  User Profile
                 </a>
               </li>
             </ul>
@@ -94,14 +100,11 @@ function Navbar() {
                           Email
                         </label>
                         <div>
-                          <input type="text" class="form-control" />
+                          <input type="text" class="form-control" required />
                         </div>
                       </div>
                       <div>
-                        <label
-                          for="inputPassword"
-                          class="col-form-label"
-                        >
+                        <label for="inputPassword" class="col-form-label" required>
                           Password
                         </label>
                         <div>
@@ -109,50 +112,61 @@ function Navbar() {
                             type="password"
                             class="form-control"
                             id="inputPassword"
+                            required
                           />
                         </div>
-                        <label htmlFor=""><p>Don't Have an Account? <a href="#" onClick={hideLogin}>Sign up</a></p></label>
+                        <label htmlFor="">
+                          <p>
+                            Don't Have an Account?{" "}
+                            <a href="#" onClick={hideLogin}>
+                              Sign up
+                            </a>
+                          </p>
+                        </label>
                       </div>
                     </div>
                     <div class="hidden" id="SignUp">
-                    <div class="mb-3 row">
-                      <label for="staticEmail" class="col-form-label">
-                        Email
-                      </label>
+                      <div class="mb-3 row">
+                        <label for="staticEmail" class="col-form-label">
+                          Email
+                        </label>
+                        <div>
+                          <input type="text" class="form-control" required/>
+                        </div>
+                      </div>
                       <div>
-                        <input type="text" class="form-control" />
+                        <label for="inputPassword" class="col-form-label">
+                          Password
+                        </label>
+                        <div>
+                          <input
+                            type="password"
+                            class="form-control"
+                            id="inputPassword"
+                            required
+                          />
+                        </div>
+                        <label for="inputPassword" class="col-form-label">
+                          Re-enter Password
+                        </label>
+                        <div>
+                          <input
+                            type="password"
+                            class="form-control"
+                            id="inputPassword"
+                            required
+                          />
+                        </div>
+                        <label htmlFor="">
+                          <p>
+                            Have an Account?{" "}
+                            <a href="#" onClick={hideSignup}>
+                              Log in
+                            </a>
+                          </p>
+                        </label>
                       </div>
                     </div>
-                    <div>
-                      <label
-                        for="inputPassword"
-                        class="col-form-label"
-                      >
-                        Password
-                      </label>
-                      <div >
-                        <input
-                          type="password"
-                          class="form-control"
-                          id="inputPassword"
-                        />
-                      </div>
-                      <label
-                        for="inputPassword"
-                        class="col-form-label"
-                      >
-                        Re-enter Password
-                      </label>
-                      <div>
-                        <input
-                          type="password"
-                          class="form-control"
-                          id="inputPassword"
-                        />
-                      </div>
-                      <label htmlFor=""><p>Have an Account? <a href="#" onClick={hideSignup}>Log in</a></p></label>
-                    </div>
-                  </div>
                     <div class="modal-footer">
                       <button
                         type="button"
@@ -166,7 +180,6 @@ function Navbar() {
                       </button>
                     </div>
                   </div>
-                  
                 </div>
               </div>
             </div>

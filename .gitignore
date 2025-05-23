@@ -24,11 +24,8 @@ yarn-error.log*
 
 
 # Ignore large files
-*.zip
-*.mp4
-*.pkl
-*.h5
-*.keras
+api/models
 api/environment/
+api/api-env/
 node_modules/
 uploads/

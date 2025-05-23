@@ -94,6 +94,7 @@ def upload_file():
         file_path = os.path.join(UPLOAD_FOLDER, file.filename)
         file.save(file_path)
         caption = generate_caption(file_path)
+        os.remove(file_path)
         return jsonify({'caption': caption}), 200
 if __name__=="__main__":
     api.run()

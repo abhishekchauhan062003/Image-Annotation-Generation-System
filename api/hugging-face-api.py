@@ -30,6 +30,11 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 processor = BlipProcessor.from_pretrained(MODEL_PATH)
 model = BlipForConditionalGeneration.from_pretrained(MODEL_PATH).to(device)
 
+
+@app.route('/logo192.png')
+def ignore_logo():
+    return '', 204
+
 @app.route('/upload', methods=['POST'])
 def upload_file():
     if 'file' not in request.files:

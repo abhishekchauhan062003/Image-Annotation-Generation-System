@@ -1,6 +1,9 @@
 
 .hero{
-    background-image: url("ocean.jpg");
+  background: #304352;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #d7d2cc, #304352);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #d7d2cc, #304352); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 html, body {
     margin: 0;
@@ -35,7 +38,7 @@ html, body {
 }
 
 .form-content .form-items {
-  border: 3px solid #E97451;
+  
   padding: 40px;
   display: inline-block;
   width: 100%;
@@ -121,7 +124,8 @@ html, body {
   padding: 8px 20px;
   border-radius: 6px;
   text-align: left;
-  background-color: #fff;
+  background-color: #ffffff;
+  
   border: 0;
   font-size: 15px;
   font-weight: 300;
@@ -139,7 +143,17 @@ html, body {
   background-color: #ebeff8;
   color: #8D8D8D;
 }
+.form-body{
+ background: #304352;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #d7d2cc, #304352);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #d7d2cc, #304352); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+} 
 
+.card-all{
+   background: #5b6c7a;
+  background: -webkit-linear-gradient(to right, #f0edea, #5b6c7a);
+  background: linear-gradient(to right, #f0edea, #5b6c7a);
+}
 .mv-up{
   margin-top: -9px !important;
   margin-bottom: 8px !important;
@@ -187,4 +201,63 @@ html, body {
 
 .hidden{
   display: none;
+}
+/* .navbar {
+  background: linear-gradient(to right, #000 0%, #222 30%, #333 100%);
+}
+
+.nav-links {
+  background-color: transparent;
+  backdrop-filter: blur(5px);
+} */
+.glass-light-navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background: rgba(255, 255, 255, 0.4);       /* Semi-transparent white */
+  backdrop-filter: blur(20px);                /* Thick blur */
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Nav links */
+.glass-light-navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 2.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.glass-light-navbar a {
+  text-decoration: none;
+  color: #222;
+  font-weight: 600;
+  font-size: 1.1rem;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.glass-light-navbar a::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background-color: #007BFF;
+  transition: width 0.3s ease;
+}
+
+.glass-light-navbar a:hover {
+  color: #007BFF;
+}
+
+.glass-light-navbar a:hover::after {
+  width: 100%;
 }

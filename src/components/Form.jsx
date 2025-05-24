@@ -8,6 +8,7 @@ const Form = () => {
   const [preview, setPreview] = useState(null);
   const [caption, setCaption] = useState(null);
   const [useWebcam, setUseWebcam] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // New loading state
   const webcamRef = React.useRef(null);
 
   const videoConstraints = {
@@ -38,13 +39,11 @@ const Form = () => {
           const file = new File([blob], "webcam.jpg", { type: "image/jpeg" });
           setSelectedImage(file);
           
-          // Stop the webcam stream
           const stream = webcamRef.current.video.srcObject;
           if (stream) {
             stream.getTracks().forEach(track => track.stop());
           }
           
-          // Hide the webcam UI
           setUseWebcam(false);
         });
     }
@@ -53,6 +52,7 @@ const Form = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (selectedImage) {
+      setIsLoading(true); // Start loading
       const formData = new FormData();
       formData.append('file', selectedImage);
 
@@ -65,6 +65,8 @@ const Form = () => {
         setCaption(response.data.caption);
       } catch (error) {
         console.error('Error uploading the file', error);
+      } finally {
+        setIsLoading(false); // Stop loading regardless of success/failure
       }
     }
   };
@@ -81,7 +83,7 @@ const Form = () => {
       <div className="row">
         <div className="form-holder">
           <div className="form-content">
-            <div className="form-items">
+            <div className="form-items" style={{top: "2.5rem"}}>
               <h3>Enter Image below to generate text</h3>
               <div className="form-check mb-3">
                 <input
@@ -146,12 +148,48 @@ const Form = () => {
                     id="submit" 
                     type="submit" 
                     className="btn btn-primary"
-                    disabled={!selectedImage}
+                    disabled={!selectedImage || isLoading}
                   >
-                    Generate
+                    {isLoading ? 'Generating...' : 'Generate'}
                   </button>
+                  <br />
+                  {/* Loader animation */}
+                  {isLoading && (
+                    <div className="loader-6 mt-3" style={{
+                      width: '48px',
+                      height: '48px',
+                      display: 'inline-block',
+                      position: 'relative',
+                      transform: 'rotate(45deg)',
+                      scale: '0.7',
+                      marginLeft: '20px'
+                    }}>
+                      <div style={{
+                        content: '""',
+                        boxSizing: 'border-box',
+                        width: '24px',
+                        height: '24px',
+                        position: 'absolute',
+                        left: '0',
+                        top: '-24px',
+                        animation: 'animloader 4s ease infinite'
+                      }}></div>
+                      <div style={{
+                        content: '""',
+                        boxSizing: 'border-box',
+                        position: 'absolute',
+                        left: '0',
+                        top: '0',
+                        width: '24px',
+                        height: '24px',
+                        background: '#00A9FE',
+                        boxShadow: '0 0 10px rgba(0, 0, 0, 0.15)',
+                        animation: 'animloader2 2s ease infinite'
+                      }}></div>
+                    </div>
+                  )}
                   
-                  {caption && (
+                  {caption && !isLoading && (
                     <div className="mt-3">
                       <h4>Caption</h4>
                       <p>{caption}</p>
@@ -170,6 +208,68 @@ const Form = () => {
           </div>
         </div>
       </div>
+
+      {/* Add the CSS animations to the component */}
+      <style>
+        {`
+          @keyframes animloader {
+            0% {
+              box-shadow: 0 24px rgba(255, 255, 255, 0), 24px 24px rgba(255, 255, 255, 0),
+                24px 48px rgba(255, 255, 255, 0), 0px 48px rgba(255, 255, 255, 0);
+            }
+            12% {
+              box-shadow: 0 24px #5d5d5d, 24px 24px rgba(255, 255, 255, 0),
+                24px 48px rgba(255, 255, 255, 0), 0px 48px rgba(255, 255, 255, 0);
+            }
+            25% {
+              box-shadow: 0 24px #5d5d5d, 24px 24px #5d5d5d,
+                24px 48px rgba(255, 255, 255, 0), 0px 48px rgba(255, 255, 255, 0);
+            }
+            37% {
+              box-shadow: 0 24px #5d5d5d, 24px 24px #5d5d5d, 24px 48px #5d5d5d,
+                0px 48px rgba(255, 255, 255, 0);
+            }
+            50% {
+              box-shadow: 0 24px #5d5d5d, 24px 24px #5d5d5d, 24px 48px #5d5d5d,
+                0px 48px #5d5d5d;
+            }
+            62% {
+              box-shadow: 0 24px rgba(255, 255, 255, 0), 24px 24px #5d5d5d,
+                24px 48px #5d5d5d, 0px 48px #5d5d5d;
+            }
+            75% {
+              box-shadow: 0 24px rgba(255, 255, 255, 0), 24px 24px rgba(255, 255, 255, 0),
+                24px 48px #5d5d5d, 0px 48px #5d5d5d;
+            }
+            87% {
+              box-shadow: 0 24px rgba(255, 255, 255, 0), 24px 24px rgba(255, 255, 255, 0),
+                24px 48px rgba(255, 255, 255, 0), 0px 48px #5d5d5d;
+            }
+            100% {
+              box-shadow: 0 24px rgba(255, 255, 255, 0), 24px 24px rgba(255, 255, 255, 0),
+                24px 48px rgba(255, 255, 255, 0), 0px 48px rgba(255, 255, 255, 0);
+            }
+          }
+
+          @keyframes animloader2 {
+            0% {
+              transform: translate(0, 0) rotateX(0) rotateY(0);
+            }
+            25% {
+              transform: translate(100%, 0) rotateX(0) rotateY(180deg);
+            }
+            50% {
+              transform: translate(100%, 100%) rotateX(-180deg) rotateY(180deg);
+            }
+            75% {
+              transform: translate(0, 100%) rotateX(-180deg) rotateY(360deg);
+            }
+            100% {
+              transform: translate(0, 0) rotateX(0) rotateY(360deg);
+            }
+          }
+        `}
+      </style>
     </div>
   );
 };

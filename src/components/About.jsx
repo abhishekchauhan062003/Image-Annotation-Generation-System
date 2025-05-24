@@ -2,6 +2,7 @@
   import myPhoto from "../photos/myPhoto.png"
   import Ashutosh from "../photos/Ashutosh.png"
   import Lokesh from "../photos/Lokesh.jpg"
+  import "../App.css";
  
   function About(){
       
@@ -16,7 +17,7 @@
       
   return (
   <div>
-  <div className="card container my-5" >
+  <div className="card card-all container my-5" style={{top: "2.5rem"}}>
     
     <div className="card-body">
       <blockquote className="blockquote mb-0">

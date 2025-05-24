@@ -9,9 +9,7 @@ function Navbar() {
     height: "50px",
     width: "200px",
   };
-  const navstyle = {
-    backgroundColor: "rgba(30, 30, 30)",
-  };
+ 
 
   function hideLogin() {
     document.getElementById("Login").classList.add("hidden");
@@ -24,11 +22,9 @@ function Navbar() {
     setText("Log in");
   }
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark " style={navstyle}>
+    <nav className="navbar navbar-expand-lg glass-light-navbar ">
       <div className="container-fluid">
-        <a href="/">
-          <img src={caption} alt="caption" style={imgstyle} />
-        </a>
+        <img src={caption} alt="caption" style={imgstyle} href='/' />
         <button
           className="navbar-toggler"
           type="button"
@@ -44,7 +40,7 @@ function Navbar() {
           <div>
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="/">
+                <a className="nav-link" aria-current="page" href="/">
                   Home
                 </a>
               </li>

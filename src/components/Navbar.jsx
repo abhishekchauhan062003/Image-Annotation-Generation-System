@@ -37,7 +37,9 @@ function Navbar() {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
-          <div>
+          
+          <div className="ms-auto">
+            <div>
             <ul className="navbar-nav">
               <li className="nav-item">
                 <a className="nav-link" aria-current="page" href="/">
@@ -50,135 +52,12 @@ function Navbar() {
                 </a>
               </li>
               <li>
-              <a className="nav-link" href="/Profile">
-                  User Profile
+              <a className="nav-link" href="/form">
+                  Generate
                 </a>
               </li>
             </ul>
           </div>
-          <div className="ms-auto">
-            <button
-              type="button"
-              class="btn btn-primary"
-              data-bs-toggle="modal"
-              data-bs-target="#exampleModal"
-            >
-              Log in/Sign up
-            </button>
-
-            <div
-              class="modal fade"
-              id="exampleModal"
-              tabindex="-1"
-              aria-labelledby="exampleModalLabel"
-              aria-hidden="true"
-            >
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">
-                      {text}
-                    </h1>
-                    <button
-                      type="button"
-                      class="btn-close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    ></button>
-                  </div>
-                  <div class="modal-body">
-                    <div id="Login">
-                      <div class="mb-3 row">
-                        <label
-                          for="staticEmail"
-                          class="col-sm-2 col-form-label"
-                        >
-                          Email
-                        </label>
-                        <div>
-                          <input type="text" class="form-control" required />
-                        </div>
-                      </div>
-                      <div>
-                        <label for="inputPassword" class="col-form-label" required>
-                          Password
-                        </label>
-                        <div>
-                          <input
-                            type="password"
-                            class="form-control"
-                            id="inputPassword"
-                            required
-                          />
-                        </div>
-                        <label htmlFor="">
-                          <p>
-                            Don't Have an Account?{" "}
-                            <a href="#" onClick={hideLogin}>
-                              Sign up
-                            </a>
-                          </p>
-                        </label>
-                      </div>
-                    </div>
-                    <div class="hidden" id="SignUp">
-                      <div class="mb-3 row">
-                        <label for="staticEmail" class="col-form-label">
-                          Email
-                        </label>
-                        <div>
-                          <input type="text" class="form-control" required/>
-                        </div>
-                      </div>
-                      <div>
-                        <label for="inputPassword" class="col-form-label">
-                          Password
-                        </label>
-                        <div>
-                          <input
-                            type="password"
-                            class="form-control"
-                            id="inputPassword"
-                            required
-                          />
-                        </div>
-                        <label for="inputPassword" class="col-form-label">
-                          Re-enter Password
-                        </label>
-                        <div>
-                          <input
-                            type="password"
-                            class="form-control"
-                            id="inputPassword"
-                            required
-                          />
-                        </div>
-                        <label htmlFor="">
-                          <p>
-                            Have an Account?{" "}
-                            <a href="#" onClick={hideSignup}>
-                              Log in
-                            </a>
-                          </p>
-                        </label>
-                      </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button
-                        type="button"
-                        class="btn btn-secondary"
-                        data-bs-dismiss="modal"
-                      >
-                        Close
-                      </button>
-                      <button type="button" class="btn btn-primary">
-                        <span>{text}</span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>

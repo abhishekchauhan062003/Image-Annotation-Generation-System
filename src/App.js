@@ -25,8 +25,6 @@ function App() {
                 <Footer />
             </div> 
             
-            {/* <Login/> */}
-            
         </>
        
   );

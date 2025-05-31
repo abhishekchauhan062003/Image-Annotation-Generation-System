@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import axios from 'axios';
 import Webcam from 'react-webcam';
 import "../App.css";
@@ -8,14 +8,44 @@ const Form = () => {
   const [preview, setPreview] = useState(null);
   const [caption, setCaption] = useState(null);
   const [useWebcam, setUseWebcam] = useState(false);
-  const [isLoading, setIsLoading] = useState(false); // New loading state
-  const webcamRef = React.useRef(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isWebcamActive, setIsWebcamActive] = useState(false);
+  const webcamRef = useRef(null);
 
   const videoConstraints = {
     width: 500,
     height: 300,
     facingMode: "user"
   };
+
+  const stopWebcam = () => {
+    if (webcamRef.current) {
+      const stream = webcamRef.current.video?.srcObject;
+      if (stream) {
+        stream.getTracks().forEach(track => track.stop());
+      }
+    }
+    setIsWebcamActive(false);
+  };
+
+  const toggleWebcam = () => {
+    const newState = !useWebcam;
+    setUseWebcam(newState);
+    setPreview(null);
+    setSelectedImage(null);
+    
+    if (!newState) {
+      stopWebcam();
+    } else {
+      setIsWebcamActive(true);
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      stopWebcam();
+    };
+  }, []);
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -30,6 +60,8 @@ const Form = () => {
   };
 
   const captureWebcamImage = useCallback(() => {
+    if (!webcamRef.current) return;
+    
     const imageSrc = webcamRef.current.getScreenshot();
     if (imageSrc) {
       setPreview(imageSrc);
@@ -38,12 +70,7 @@ const Form = () => {
         .then(blob => {
           const file = new File([blob], "webcam.jpg", { type: "image/jpeg" });
           setSelectedImage(file);
-          
-          const stream = webcamRef.current.video.srcObject;
-          if (stream) {
-            stream.getTracks().forEach(track => track.stop());
-          }
-          
+          stopWebcam();
           setUseWebcam(false);
         });
     }
@@ -52,7 +79,7 @@ const Form = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (selectedImage) {
-      setIsLoading(true); // Start loading
+      setIsLoading(true);
       const formData = new FormData();
       formData.append('file', selectedImage);
 
@@ -66,7 +93,7 @@ const Form = () => {
       } catch (error) {
         console.error('Error uploading the file', error);
       } finally {
-        setIsLoading(false); // Stop loading regardless of success/failure
+        setIsLoading(false);
       }
     }
   };
@@ -75,6 +102,7 @@ const Form = () => {
     setSelectedImage(null);
     setPreview(null);
     setCaption(null);
+    stopWebcam();
     setUseWebcam(false);
   };
 
@@ -84,17 +112,17 @@ const Form = () => {
         <div className="form-holder">
           <div className="form-content">
             <div className="form-items" style={{top: "2.5rem"}}>
-              <h3>Enter Image below to generate text</h3>
-              <div className="form-check mb-3">
-                <input
-                  type="checkbox"
-                  checked={useWebcam}
-                  onChange={() => {
-                    setUseWebcam(!useWebcam);
-                    setPreview(null);
-                    setSelectedImage(null);
-                  }}
-                /> Use Webcam Instead
+              <h3>Enter Image below to <strong className='text-primary'>generate</strong> text</h3>
+              <div className="form-check mb-3 mt-2">
+                <label className="toggle-switch">
+                  <input
+                    type="checkbox"
+                    checked={useWebcam}
+                    onChange={toggleWebcam}
+                  />
+                  <span className="slider round"></span>
+                  <span className="toggle-label">Use Webcam Instead</span>
+                </label>
               </div>
               
               <form onSubmit={handleSubmit}>
@@ -109,19 +137,26 @@ const Form = () => {
                     />
                   ) : (
                     <>
-                      <Webcam
-                        audio={false}
-                        height={300}
-                        ref={webcamRef}
-                        screenshotFormat="image/jpeg"
-                        width={500}
-                        videoConstraints={videoConstraints}
-                      />
+                      {isWebcamActive ? (
+                        <Webcam
+                          audio={false}
+                          height={300}
+                          ref={webcamRef}
+                          screenshotFormat="image/jpeg"
+                          width={500}
+                          videoConstraints={videoConstraints}
+                        />
+                      ) : (
+                        <div className="webcam-placeholder">
+                          <p>Webcam is starting...</p>
+                        </div>
+                      )}
                       <br />
                       <button 
                         type="button" 
                         onClick={captureWebcamImage} 
                         className="btn btn-secondary mt-2"
+                        disabled={!isWebcamActive}
                       >
                         Capture
                       </button>
@@ -143,7 +178,7 @@ const Form = () => {
                   <p>We will not share your data.</p>
                 </div>
                 
-                <div className="form-button mt-3">
+                <div className="form-button rounded-2 mt-3">
                   <button 
                     id="submit" 
                     type="submit" 
@@ -153,7 +188,6 @@ const Form = () => {
                     {isLoading ? 'Generating...' : 'Generate'}
                   </button>
                   <br />
-                  {/* Loader animation */}
                   {isLoading && (
                     <div className="loader-6 mt-3" style={{
                       width: '48px',
@@ -209,9 +243,65 @@ const Form = () => {
         </div>
       </div>
 
-      {/* Add the CSS animations to the component */}
       <style>
         {`
+          .toggle-switch {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+          }
+          
+          .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+          }
+          
+          .slider {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+            margin-right: 10px;
+          }
+          
+          .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+          }
+          
+          input:checked + .slider {
+            background-color: #2196F3;
+          }
+          
+          input:checked + .slider:before {
+            transform: translateX(26px);
+          }
+          
+          .toggle-label {
+            font-weight: 500;
+          }
+          
+          .webcam-placeholder {
+            width: 500px;
+            height: 300px;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+          }
+
           @keyframes animloader {
             0% {
               box-shadow: 0 24px rgba(255, 255, 255, 0), 24px 24px rgba(255, 255, 255, 0),

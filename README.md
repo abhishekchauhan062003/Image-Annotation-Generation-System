@@ -1,70 +1,105 @@
-# Getting Started with Create React App
+# Image Annotation Generation System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Application Preview](https://github.com/abhishekchauhan062003/Image-Annotation-Generation-System/blob/main/public/logo.png)
 
-## Available Scripts
+A full-stack web application for creating and managing image annotations with AI capabilities, featuring a React frontend and Flask backend.
 
-In the project directory, you can run:
+## ✨ Features
 
-### `npm start`
+- Interactive image annotation canvas
+- AI-powered annotation suggestions
+- Multi-user collaboration support
+- Export annotations in multiple formats
+- Responsive web design
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🚀 Quick Start
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Prerequisites
+- Node.js v16+
+- Python 3.8+
+- Git (optional)
 
-### `npm test`
+### Installation
+```bash
+# Clone the repository
+git clone https://github.com/abhishekchauhan062003/Image-Annotation-Generation-System
+cd Image-Annotation-Generation-System
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Install backend dependencies
+```bash
+cd api
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+.\venv\Scripts\activate   # Windows
+pip install -r requirements.txt
+cd ..
+```
 
-### `npm run build`
+# Install frontend dependencies
+npm install
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Running the Application
+#### Windows:
+```powershell
+# Using PowerShell
+.\start.ps1
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# OR using batch file
+start.bat
+```
+### Linux
+```bash
+# Start backend (in one terminal)
+cd api
+source venv/bin/activate
+flask run --port 5000
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Start frontend (in another terminal)
+npm start
+```
+# 🔧 Project Structure
+```
+.
+├── api/                    # Flask backend
+│   ├── api-env/               # Python virtual environment
+│   ├── app.py              # Main application file
+│   ├── requirements.txt    # Python dependencies
+│   └── ...                 # Other backend files
+├── models/                 # Machine learning models
+│   └── ...                 # Model files
+├── public/                 # Static assets
+│   ├── camera.jpg          # Sample image
+│   ├── favicon.ico         # Browser icon
+│   ├── index.html          # Main HTML template
+│   └── ...                 # Other assets
+├── src/                    # React application
+│   ├── components/         # React components
+│   ├── App.js              # Main component
+│   └── ...                 # Other source files
+├── .gitignore
+├── package.json            # Frontend dependencies
+├── package-lock.json
+├── README.md               # This file
+├── start.ps1               # PowerShell launcher
+└── start.bat               # Batch file launcher
+```
+# 🤝 Contributing
+Fork the repository
 
-### `npm run eject`
+- Create your feature branch (git checkout -b feature/AmazingFeature)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Commit your changes (git commit -m 'Add some AmazingFeature')
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Push to the branch (git push origin feature/AmazingFeature)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Open a Pull Request
+# 📧 Team
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+| Member | Role | Contact |
+|--------|------|---------|
+| [@lokeshjoshi](https://github.com/lucky-2104) | Backend Developer | lokesh2104joshi@gmail.com |
+| [@ashutoshupreti](https://github.com/AshutoshUpreti096) | Frontend Developer | ashutoshupreti096@gmail.com |
+| [@abhishekchauhan](https://github.com/abhishekchauhan062003) | ML Engineer | abhic062003@email.com |
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
